@@ -39,6 +39,7 @@ return [
         'base_url' => env('SMS_BASE_URL', 'https://api.smsonlinegh.com'),
         'api_key' => env('SMS_API_KEY'),
         'sender_id' => env('SMS_SENDER_ID', 'BitLogic'),
+        'app_hash' => env('SMS_APP_HASH', ''),
     ],
 
 ];

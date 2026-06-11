@@ -40,8 +40,10 @@ class SendVerificationCode extends Notification implements ShouldQueue
 
     public function toSmsOnlineGh(object $notifiable): SmsOnlineGhMessage
     {
+        $hash = config('services.sms_online_gh.app_hash', '');
+
         return new SmsOnlineGhMessage(
-            content: "Your verification code is: {$this->code}. Expires in 10 minutes.",
+            content: "<#> Your BuzSpace code is: {$this->code}. Expires in 10 minutes.\n{$hash}",
         );
     }
 }
