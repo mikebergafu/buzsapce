@@ -18,6 +18,18 @@ class Spaces extends Component
     #[Url]
     public string $search = '';
 
+    public ?Space $viewing = null;
+
+    public function viewSpace(int $spaceId): void
+    {
+        $this->viewing = Space::with(['user', 'images', 'pricingOptions'])->find($spaceId);
+    }
+
+    public function closeDetail(): void
+    {
+        $this->viewing = null;
+    }
+
     public function toggleAvailability(int $spaceId): void
     {
         $space = Space::findOrFail($spaceId);
