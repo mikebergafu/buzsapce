@@ -31,6 +31,8 @@ class SpaceController extends Controller
         $data = $request->validate([
             'name' => 'required|string|max:255',
             'structure_type' => 'nullable|string|max:50',
+            'suitable_for' => 'nullable|array',
+            'suitable_for.*' => 'string|max:50',
             'description' => 'nullable|string|max:2000',
             'location' => 'nullable|string|max:255',
             'latitude' => 'nullable|numeric|between:-90,90',
