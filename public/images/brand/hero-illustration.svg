@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" fill="none">
+  <!-- Background shapes -->
+  <circle cx="300" cy="200" r="180" fill="#ECFDF5" opacity="0.6"/>
+  <circle cx="420" cy="120" r="60" fill="#D1FAE5" opacity="0.5"/>
+  <circle cx="160" cy="300" r="40" fill="#A7F3D0" opacity="0.4"/>
+
+  <!-- Main shop building -->
+  <rect x="200" y="160" width="200" height="140" rx="8" fill="white" stroke="#059669" stroke-width="2"/>
+  <!-- Roof -->
+  <path d="M190 160L300 100L410 160" fill="#059669"/>
+  <path d="M190 160L300 100L410 160" stroke="#047857" stroke-width="2"/>
+  <!-- Windows -->
+  <rect x="220" y="180" width="40" height="40" rx="4" fill="#ECFDF5" stroke="#059669" stroke-width="1.5"/>
+  <rect x="340" y="180" width="40" height="40" rx="4" fill="#ECFDF5" stroke="#059669" stroke-width="1.5"/>
+  <!-- Door -->
+  <rect x="275" y="230" width="50" height="70" rx="4" fill="#059669"/>
+  <circle cx="315" cy="268" r="3" fill="white"/>
+  <!-- Awning stripes -->
+  <path d="M200 160H400" stroke="#047857" stroke-width="3"/>
+
+  <!-- Person 1 - left (space owner) -->
+  <circle cx="140" cy="210" r="16" fill="#FDE68A"/>
+  <rect x="128" y="230" width="24" height="50" rx="8" fill="#059669"/>
+  <!-- Holding key icon -->
+  <circle cx="155" cy="245" r="6" stroke="#D97706" stroke-width="2" fill="none"/>
+  <line x1="155" y1="251" x2="155" y2="260" stroke="#D97706" stroke-width="2"/>
+
+  <!-- Person 2 - right (seller) -->
+  <circle cx="460" cy="220" r="16" fill="#FDE68A"/>
+  <rect x="448" y="240" width="24" height="50" rx="8" fill="#F59E0B"/>
+  <!-- Holding bag icon -->
+  <rect x="468" y="248" width="16" height="18" rx="3" fill="#DC2626" opacity="0.8"/>
+  <path d="M471 248V244C471 241.791 472.791 240 475 240H477C479.209 240 481 241.791 481 244V248" stroke="#DC2626" stroke-width="1.5" fill="none"/>
+
+  <!-- Connection lines (dots) -->
+  <circle cx="175" cy="250" r="3" fill="#059669" opacity="0.4"/>
+  <circle cx="195" cy="255" r="3" fill="#059669" opacity="0.5"/>
+  <circle cx="430" cy="255" r="3" fill="#059669" opacity="0.4"/>
+  <circle cx="413" cy="260" r="3" fill="#059669" opacity="0.5"/>
+
+  <!-- Location pin on top -->
+  <g transform="translate(285, 60)">
+    <path d="M15 2C10.029 2 6 5.858 6 10.625C6 17 15 26 15 26C15 26 24 17 24 10.625C24 5.858 19.971 2 15 2Z" fill="#059669"/>
+    <circle cx="15" cy="10" r="4" fill="white"/>
+  </g>
+
+  <!-- "Available" badge -->
+  <g transform="translate(330, 130)">
+    <rect width="80" height="24" rx="12" fill="#059669"/>
+    <text x="40" y="16" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="white" text-anchor="middle">Available</text>
+  </g>
+
+  <!-- Decorative dots -->
+  <circle cx="520" cy="80" r="4" fill="#34D399"/>
+  <circle cx="80" cy="120" r="4" fill="#34D399"/>
+  <circle cx="540" cy="320" r="6" fill="#A7F3D0"/>
+  <circle cx="60" cy="350" r="5" fill="#D1FAE5"/>
+</svg>

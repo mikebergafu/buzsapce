@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 48" fill="none">
+  <!-- Icon: Shop + Location Pin hybrid -->
+  <g>
+    <!-- Pin shape -->
+    <path d="M24 4C15.163 4 8 10.832 8 19.25C8 30.5 24 44 24 44C24 44 40 30.5 40 19.25C40 10.832 32.837 4 24 4Z" fill="#059669"/>
+    <!-- Shop roof inside pin -->
+    <path d="M15 18L24 12L33 18" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Shop body -->
+    <rect x="17" y="18" width="14" height="9" rx="1" stroke="white" stroke-width="2"/>
+    <!-- Shop door -->
+    <rect x="21.5" y="21" width="5" height="6" rx="0.5" stroke="white" stroke-width="1.5"/>
+  </g>
+  <!-- Text -->
+  <text x="52" y="33" font-family="system-ui, -apple-system, sans-serif" font-size="28" font-weight="700" fill="#18181B">
+    Buz<tspan fill="#059669">Space</tspan>
+  </text>
+</svg>

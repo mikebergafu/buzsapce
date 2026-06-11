@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 560" fill="none">
+  <!-- Phone body -->
+  <rect x="20" y="20" width="240" height="520" rx="36" fill="#18181B" stroke="#3F3F46" stroke-width="2"/>
+  <!-- Screen -->
+  <rect x="32" y="60" width="216" height="440" rx="4" fill="white"/>
+  <!-- Notch -->
+  <rect x="100" y="28" width="80" height="24" rx="12" fill="#09090B"/>
+
+  <!-- App content inside phone -->
+  <!-- Status bar -->
+  <rect x="32" y="60" width="216" height="32" fill="#059669"/>
+  <text x="140" y="80" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="white" text-anchor="middle">BuzSpace</text>
+
+  <!-- Search bar -->
+  <rect x="44" y="104" width="192" height="36" rx="8" fill="#F4F4F5" stroke="#E4E4E7" stroke-width="1"/>
+  <text x="64" y="126" font-family="system-ui, sans-serif" font-size="11" fill="#A1A1AA">Search spaces near you...</text>
+  <circle cx="222" cy="122" r="10" fill="#059669"/>
+  <path d="M219 122L222 119L225 122M222 119V126" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- Category pills -->
+  <rect x="44" y="152" width="56" height="24" rx="12" fill="#059669"/>
+  <text x="72" y="168" font-family="system-ui, sans-serif" font-size="9" font-weight="500" fill="white" text-anchor="middle">All</text>
+  <rect x="108" y="152" width="56" height="24" rx="12" fill="#F4F4F5" stroke="#E4E4E7"/>
+  <text x="136" y="168" font-family="system-ui, sans-serif" font-size="9" font-weight="500" fill="#71717A" text-anchor="middle">Shops</text>
+  <rect x="172" y="152" width="64" height="24" rx="12" fill="#F4F4F5" stroke="#E4E4E7"/>
+  <text x="204" y="168" font-family="system-ui, sans-serif" font-size="9" font-weight="500" fill="#71717A" text-anchor="middle">Markets</text>
+
+  <!-- Space card 1 -->
+  <rect x="44" y="188" width="192" height="120" rx="8" fill="#F9FAFB" stroke="#E5E7EB" stroke-width="1"/>
+  <rect x="48" y="192" width="184" height="68" rx="6" fill="#D1FAE5"/>
+  <text x="140" y="230" font-family="system-ui, sans-serif" font-size="10" fill="#059669" text-anchor="middle">📍 Shop Photo</text>
+  <text x="56" y="278" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#18181B">Makola Market Space</text>
+  <text x="56" y="296" font-family="system-ui, sans-serif" font-size="9" fill="#71717A">Accra • 2x3m • GH₵50/day</text>
+
+  <!-- Space card 2 -->
+  <rect x="44" y="320" width="192" height="120" rx="8" fill="#F9FAFB" stroke="#E5E7EB" stroke-width="1"/>
+  <rect x="48" y="324" width="184" height="68" rx="6" fill="#FEF3C7"/>
+  <text x="140" y="362" font-family="system-ui, sans-serif" font-size="10" fill="#D97706" text-anchor="middle">📍 Shop Photo</text>
+  <text x="56" y="410" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#18181B">Kejetia Store Front</text>
+  <text x="56" y="428" font-family="system-ui, sans-serif" font-size="9" fill="#71717A">Kumasi • 3x4m • GH₵80/day</text>
+
+  <!-- Bottom nav -->
+  <rect x="32" y="460" width="216" height="40" fill="#FAFAFA"/>
+  <line x1="32" y1="460" x2="248" y2="460" stroke="#E4E4E7"/>
+  <circle cx="80" cy="480" r="4" fill="#059669"/>
+  <circle cx="140" cy="480" r="4" fill="#D4D4D8"/>
+  <circle cx="200" cy="480" r="4" fill="#D4D4D8"/>
+  <text x="80" y="494" font-family="system-ui, sans-serif" font-size="7" fill="#059669" text-anchor="middle">Home</text>
+  <text x="140" y="494" font-family="system-ui, sans-serif" font-size="7" fill="#A1A1AA" text-anchor="middle">Search</text>
+  <text x="200" y="494" font-family="system-ui, sans-serif" font-size="7" fill="#A1A1AA" text-anchor="middle">Profile</text>
+</svg>

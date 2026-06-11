@@ -1,0 +1,27 @@
+<?php
+
+use App\Http\Controllers\Api\V1\AuthController;
+use App\Http\Controllers\Api\V1\ProfileController;
+use App\Http\Controllers\Api\V1\SpaceController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+
+Route::get('/user', function (Request $request) {
+    return $request->user();
+})->middleware('auth:sanctum');
+
+Route::prefix('v1/auth')->group(function () {
+    Route::post('/send-code', [AuthController::class, 'sendCode'])
+        ->middleware('throttle:5,1'); // 5 requests per minute
+
+    Route::post('/verify-code', [AuthController::class, 'verifyCode'])
+        ->middleware('throttle:5,1');
+});
+
+Route::get('v1/spaces', [SpaceController::class, 'index']);
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('v1/spaces', [SpaceController::class, 'store']);
+    Route::get('v1/my-spaces', [SpaceController::class, 'mySpaces']);
+    Route::put('v1/profile', [ProfileController::class, 'update']);
+});
