@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 /**
  * @property int $id
@@ -17,6 +18,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 #[Hidden(['password', 'remember_token'])]
 class Admin extends Authenticatable
 {
+    use Notifiable;
+
     protected $guard = 'admin';
 
     /**

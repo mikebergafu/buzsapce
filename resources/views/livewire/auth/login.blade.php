@@ -7,6 +7,9 @@
         </div>
 
         <div class="bg-white dark:bg-zinc-900 rounded-xl p-6 border border-zinc-200 dark:border-zinc-800 shadow-sm">
+            @if(session('status'))
+                <div class="mb-4 p-3 rounded-lg bg-emerald-50 dark:bg-emerald-900/20 text-sm text-emerald-700 dark:text-emerald-400">{{ session('status') }}</div>
+            @endif
             <form wire:submit="authenticate">
                 <div class="mb-4">
                     <label for="email" class="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1">Email</label>
@@ -15,7 +18,10 @@
                 </div>
 
                 <div class="mb-4">
-                    <label for="password" class="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1">Password</label>
+                    <div class="flex items-center justify-between mb-1">
+                        <label for="password" class="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Password</label>
+                        <a href="{{ route('admin.password.request') }}" class="text-xs text-emerald-600 hover:underline">Forgot password?</a>
+                    </div>
                     <input wire:model="password" id="password" type="password" class="w-full px-4 py-2.5 rounded-lg border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
                     @error('password') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror
                 </div>
