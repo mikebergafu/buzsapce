@@ -29,7 +29,7 @@ class SpaceController extends Controller
     public function store(Request $request): JsonResponse
     {
         $data = $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'nullable|string|max:255',
             'structure_type' => 'nullable|string|max:50',
             'suitable_for' => 'nullable|array',
             'suitable_for.*' => 'string|max:50',
