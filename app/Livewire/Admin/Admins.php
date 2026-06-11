@@ -35,15 +35,17 @@ class Admins extends Component
         ]);
 
         $this->reset(['name', 'email', 'password', 'showForm']);
+        $this->dispatch('toast', message: 'Admin created successfully.');
     }
 
     public function delete(int $id): void
     {
         if ($id === Auth::guard('admin')->id()) {
-            return; // Can't delete yourself
+            return;
         }
 
         Admin::where('id', $id)->delete();
+        $this->dispatch('toast', message: 'Admin removed.');
     }
 
     public function render()

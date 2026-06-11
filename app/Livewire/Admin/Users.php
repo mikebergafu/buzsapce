@@ -22,11 +22,13 @@ class Users extends Component
     {
         $user = User::findOrFail($userId);
         $user->update(['is_admin' => ! $user->is_admin]);
+        $this->dispatch('toast', message: $user->is_admin ? 'User promoted to admin.' : 'Admin role removed.');
     }
 
     public function deleteUser(int $userId): void
     {
         User::where('id', $userId)->where('is_admin', false)->delete();
+        $this->dispatch('toast', message: 'User deleted.');
     }
 
     public function render()

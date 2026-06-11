@@ -22,11 +22,13 @@ class Spaces extends Component
     {
         $space = Space::findOrFail($spaceId);
         $space->update(['is_available' => ! $space->is_available]);
+        $this->dispatch('toast', message: $space->is_available ? 'Space marked available.' : 'Space marked taken.');
     }
 
     public function deleteSpace(int $spaceId): void
     {
         Space::findOrFail($spaceId)->delete();
+        $this->dispatch('toast', message: 'Space deleted.');
     }
 
     public function render()
