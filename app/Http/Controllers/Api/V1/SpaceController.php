@@ -40,7 +40,7 @@ class SpaceController extends Controller
             'width' => 'nullable|numeric|min:0',
             'length' => 'nullable|numeric|min:0',
             'dimension_unit' => 'sometimes|in:ft,m',
-            'images' => 'nullable|array|max:5',
+            'images' => 'nullable|array|max:4',
             'images.*' => 'image|max:5120',
             'pricing_options' => 'required|array|min:1',
             'pricing_options.*.type' => 'required|in:daily,monthly,commission',
@@ -95,5 +95,32 @@ class SpaceController extends Controller
         $space->load('pricingOptions', 'images');
 
         return response()->json(['data' => $space]);
+    }
+
+    public function deleteImage(Request $request, Space $space, \App\Models\SpaceImage $image): JsonResponse
+    {
+        abort_unless($space->user_id === $request->user()->id, 403);
+        abort_unless($image->space_id === $space->id, 404);
+
+        \Illuminate\Support\Facades\Storage::disk('public')->delete($image->path);
+        $image->delete();
+
+        return response()->json(['message' => 'Image deleted']);
+    }
+
+    public function addImages(Request $request, Space $space): JsonResponse
+    {
+        abort_unless($space->user_id === $request->user()->id, 403);
+
+        $request->validate(['images' => 'required|array|max:4', 'images.*' => 'image|max:5120']);
+
+        foreach ($request->file('images') as $image) {
+            $path = $image->store('spaces', 'public');
+            $space->images()->create(['path' => $path]);
+        }
+
+        $space->load('images');
+
+        return response()->json(['data' => $space->images], 201);
     }
 }
