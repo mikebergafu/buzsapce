@@ -459,17 +459,17 @@
                 <div>
                     <h4 class="text-sm font-semibold text-white mb-4">Company</h4>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="#" class="hover:text-white transition-colors">About Us</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Careers</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Blog</a></li>
+                        <li><a href="/about" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="/careers" class="hover:text-white transition-colors">Careers</a></li>
+                        <li><a href="/contact" class="hover:text-white transition-colors">Contact</a></li>
                     </ul>
                 </div>
                 <div>
                     <h4 class="text-sm font-semibold text-white mb-4">Support</h4>
                     <ul class="space-y-2 text-sm">
                         <li><a href="#faq" class="hover:text-white transition-colors">FAQ</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Contact Us</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Help Center</a></li>
+                        <li><a href="/contact" class="hover:text-white transition-colors">Contact Us</a></li>
+                        <li><a href="/help" class="hover:text-white transition-colors">Help Center</a></li>
                     </ul>
                 </div>
             </div>
@@ -478,8 +478,8 @@
                     &copy; {{ date('Y') }} BuzSpace. All rights reserved.
                 </div>
                 <div class="flex items-center gap-6 text-sm">
-                    <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
-                    <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+                    <a href="/privacy" class="hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="/terms" class="hover:text-white transition-colors">Terms of Service</a>
                 </div>
             </div>
         </div>
