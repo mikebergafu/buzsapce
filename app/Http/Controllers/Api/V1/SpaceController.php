@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Models\Space;
+use App\Models\SpaceImage;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
 
 class SpaceController extends Controller
 {
@@ -47,13 +50,16 @@ class SpaceController extends Controller
             'pricing_options.*.amount' => 'required|numeric|min:0',
         ]);
 
+        if (empty($data['location']) && ! empty($data['latitude']) && ! empty($data['longitude'])) {
+            $data['location'] = $this->reverseGeocode($data['latitude'], $data['longitude']);
+        }
+
         $pricingOptions = $data['pricing_options'];
         unset($data['pricing_options'], $data['images']);
 
         $space = $request->user()->spaces()->create($data);
         $space->pricingOptions()->createMany($pricingOptions);
 
-        // Handle images
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
                 $path = $image->store('spaces', 'public');
@@ -85,6 +91,10 @@ class SpaceController extends Controller
             'status' => 'sometimes|in:available,taken,maintenance',
         ]);
 
+        if (empty($data['location']) && ! empty($data['latitude']) && ! empty($data['longitude'])) {
+            $data['location'] = $this->reverseGeocode($data['latitude'], $data['longitude']);
+        }
+
         if (isset($data['status'])) {
             $space->is_available = $data['status'] === 'available';
             $space->status = $data['status'];
@@ -97,12 +107,12 @@ class SpaceController extends Controller
         return response()->json(['data' => $space]);
     }
 
-    public function deleteImage(Request $request, Space $space, \App\Models\SpaceImage $image): JsonResponse
+    public function deleteImage(Request $request, Space $space, SpaceImage $image): JsonResponse
     {
         abort_unless($space->user_id === $request->user()->id, 403);
         abort_unless($image->space_id === $space->id, 404);
 
-        \Illuminate\Support\Facades\Storage::disk('public')->delete($image->path);
+        Storage::disk('public')->delete($image->path);
         $image->delete();
 
         return response()->json(['message' => 'Image deleted']);
@@ -122,5 +132,27 @@ class SpaceController extends Controller
         $space->load('images');
 
         return response()->json(['data' => $space->images], 201);
+    }
+
+    private function reverseGeocode(float $lat, float $lng): ?string
+    {
+        try {
+            $response = Http::withHeaders([
+                'User-Agent' => 'BuzSpace/1.0',
+            ])->get('https://nominatim.openstreetmap.org/reverse', [
+                'lat' => $lat,
+                'lon' => $lng,
+                'format' => 'json',
+                'zoom' => 16,
+            ]);
+
+            if ($response->successful()) {
+                return $response->json('display_name');
+            }
+        } catch (\Throwable) {
+            // Fail silently - location is optional
+        }
+
+        return null;
     }
 }
