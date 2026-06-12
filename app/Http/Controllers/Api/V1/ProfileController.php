@@ -22,4 +22,14 @@ class ProfileController extends Controller
 
         return response()->json(['user' => $request->user()->fresh()]);
     }
+
+    public function destroy(Request $request): JsonResponse
+    {
+        $user = $request->user();
+        $user->tokens()->delete();
+        $user->spaces()->delete();
+        $user->delete();
+
+        return response()->json(['message' => 'Account deleted']);
+    }
 }

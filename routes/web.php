@@ -32,3 +32,6 @@ Route::prefix('admin')->middleware(EnsureUserIsAdmin::class)->group(function () 
     Route::get('/spaces', Spaces::class)->name('admin.spaces');
     Route::get('/admins', Admins::class)->name('admin.admins');
 });
+
+Route::view('/privacy', 'pages.privacy')->name('privacy');
+Route::view('/terms', 'pages.terms')->name('terms');

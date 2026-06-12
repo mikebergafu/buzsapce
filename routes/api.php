@@ -28,6 +28,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('v1/spaces/{space}/images', [SpaceController::class, 'addImages']);
     Route::get('v1/my-spaces', [SpaceController::class, 'mySpaces']);
     Route::put('v1/profile', [ProfileController::class, 'update']);
+    Route::delete('v1/account', [ProfileController::class, 'destroy']);
     Route::post('v1/space-requests', [SpaceRequestController::class, 'store']);
     Route::get('v1/space-requests/mine', [SpaceRequestController::class, 'myRequests']);
     Route::get('v1/space-requests/incoming', [SpaceRequestController::class, 'incomingRequests']);
