@@ -23,12 +23,26 @@
                         </select>
                     </div>
                 </div>
-                <div>
+                <div x-data="{ uploading: false, progress: 0 }"
+                     x-on:livewire-upload-start="uploading = true"
+                     x-on:livewire-upload-finish="uploading = false; progress = 0"
+                     x-on:livewire-upload-cancel="uploading = false; progress = 0"
+                     x-on:livewire-upload-error="uploading = false; progress = 0"
+                     x-on:livewire-upload-progress="progress = $event.detail.progress">
                     <label class="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1">App File</label>
                     <input wire:model="file" type="file" accept=".apk,.ipa,.aab" class="w-full text-sm text-zinc-600 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100">
                     <p class="mt-1 text-xs text-zinc-400">Max file size: {{ ini_get('upload_max_filesize') }}B</p>
                     @error('file') <p class="mt-1 text-xs text-red-600">{{ $message }}</p> @enderror
-                    <div wire:loading wire:target="file" class="mt-2 text-xs text-zinc-500">Uploading...</div>
+
+                    <div x-show="uploading" x-cloak class="mt-3">
+                        <div class="flex items-center justify-between text-xs text-zinc-600 mb-1">
+                            <span>Uploading...</span>
+                            <span x-text="progress + '%'"></span>
+                        </div>
+                        <div class="w-full h-2 bg-zinc-200 dark:bg-zinc-700 rounded-full overflow-hidden">
+                            <div class="h-full bg-emerald-600 rounded-full transition-all duration-300" :style="'width: ' + progress + '%'"></div>
+                        </div>
+                    </div>
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1">Release Notes (optional)</label>
