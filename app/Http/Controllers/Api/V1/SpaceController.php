@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\ResolveSpaceLocation;
 use App\Models\Space;
 use App\Models\SpaceImage;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 
 class SpaceController extends Controller
@@ -51,7 +51,7 @@ class SpaceController extends Controller
         ]);
 
         if (empty($data['location']) && ! empty($data['latitude']) && ! empty($data['longitude'])) {
-            $data['location'] = $this->reverseGeocode($data['latitude'], $data['longitude']);
+            unset($data['location']);
         }
 
         $pricingOptions = $data['pricing_options'];
@@ -65,6 +65,10 @@ class SpaceController extends Controller
                 $path = $image->store('spaces', 'public');
                 $space->images()->create(['path' => $path]);
             }
+        }
+
+        if (! $space->location && $space->latitude && $space->longitude) {
+            ResolveSpaceLocation::dispatch($space);
         }
 
         $space->load('pricingOptions', 'images');
@@ -92,7 +96,7 @@ class SpaceController extends Controller
         ]);
 
         if (empty($data['location']) && ! empty($data['latitude']) && ! empty($data['longitude'])) {
-            $data['location'] = $this->reverseGeocode($data['latitude'], $data['longitude']);
+            unset($data['location']);
         }
 
         if (isset($data['status'])) {
@@ -102,6 +106,11 @@ class SpaceController extends Controller
         }
 
         $space->update($data);
+
+        if (! $space->location && $space->latitude && $space->longitude) {
+            ResolveSpaceLocation::dispatch($space);
+        }
+
         $space->load('pricingOptions', 'images');
 
         return response()->json(['data' => $space]);
@@ -132,27 +141,5 @@ class SpaceController extends Controller
         $space->load('images');
 
         return response()->json(['data' => $space->images], 201);
-    }
-
-    private function reverseGeocode(float $lat, float $lng): ?string
-    {
-        try {
-            $response = Http::withHeaders([
-                'User-Agent' => 'BuzSpace/1.0',
-            ])->get('https://nominatim.openstreetmap.org/reverse', [
-                'lat' => $lat,
-                'lon' => $lng,
-                'format' => 'json',
-                'zoom' => 16,
-            ]);
-
-            if ($response->successful()) {
-                return $response->json('display_name');
-            }
-        } catch (\Throwable) {
-            // Fail silently - location is optional
-        }
-
-        return null;
     }
 }
