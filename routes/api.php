@@ -22,6 +22,7 @@ Route::get('v1/spaces', [SpaceController::class, 'index']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('v1/spaces', [SpaceController::class, 'store']);
+    Route::put('v1/spaces/{space}', [SpaceController::class, 'update']);
     Route::get('v1/my-spaces', [SpaceController::class, 'mySpaces']);
     Route::put('v1/profile', [ProfileController::class, 'update']);
 });
