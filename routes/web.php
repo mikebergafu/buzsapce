@@ -2,6 +2,7 @@
 
 use App\Http\Middleware\EnsureUserIsAdmin;
 use App\Livewire\Admin\Admins;
+use App\Livewire\Admin\AppReleases;
 use App\Livewire\Admin\Dashboard;
 use App\Livewire\Admin\Pages;
 use App\Livewire\Admin\Spaces;
@@ -9,6 +10,7 @@ use App\Livewire\Admin\Users;
 use App\Livewire\Auth\ForgotPassword;
 use App\Livewire\Auth\Login;
 use App\Livewire\Auth\ResetPassword;
+use App\Models\AppRelease;
 use App\Models\Page;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -34,12 +36,22 @@ Route::prefix('admin')->middleware(EnsureUserIsAdmin::class)->group(function () 
     Route::get('/spaces', Spaces::class)->name('admin.spaces');
     Route::get('/admins', Admins::class)->name('admin.admins');
     Route::get('/pages', Pages::class)->name('admin.pages');
+    Route::get('/app-releases', AppReleases::class)->name('admin.app-releases');
 });
 
 Route::view('/about', 'pages.about')->name('about');
 Route::view('/contact', 'pages.contact')->name('contact');
 Route::view('/help', 'pages.help')->name('help');
 Route::view('/careers', 'pages.careers')->name('careers');
+
+Route::get('/download', function () {
+    $release = AppRelease::where('platform', 'android')->latest()->first();
+    if ($release) {
+        return redirect($release->download_url);
+    }
+
+    return back();
+})->name('download');
 
 Route::get('/privacy', function () {
     $page = Page::where('slug', 'privacy-policy')->first();
